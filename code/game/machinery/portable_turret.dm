@@ -541,6 +541,25 @@ var/list/turret_icons
 
 	return H.assess_perp(src, 0, 0, 1, 1, connected_faction) //if we're not checking faction or access, we're solely looking at wanted status, Arrest = pew pew
 
+/obj/machinery/porta_turret/proc/assess_borgo(var/mob/living/silicon/robot/R)
+	if(!R || !istype(R))
+		return 0
+ 	if(emagged)
+		return 10
+ 	if(connected_faction == null) //safety check
+		check_faction = 0
+		check_access = 0
+ 	if(check_faction && R.GetFaction() != connected_faction.uid)
+		return 10
+ 	if(check_access)
+		for(var/access in R.GetAccess(connected_faction.uid))
+			if(req_access["[access]"] > 0)
+				// Robots can call assess_perp too since they are mob/livings
+				return R.assess_perp(src, 0, 0, 1, 1, connected_faction)
+		return 10 //if they don't have any of the required access
+
+	return R.assess_perp(src, 0, 0, 1, 1, connected_faction) //if we're not checking faction or access, we're solely looking at wanted status, Arrest = pew pew
+
 /obj/machinery/porta_turret/proc/assess_bot(var/mob/living/bot/B)
 	if(!B || !istype(B))
 		return 1
