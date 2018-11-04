@@ -428,7 +428,7 @@
 	contains = list(/obj/item/clothing/under/rank/clown,
 					/obj/item/clothing/mask/gas/clown_hat,
 					/obj/item/clothing/shoes/clown_shoes,
-					/obj/item/weapon/bikehorn,
+					/obj/item/weapon/bikehorn = 2,
 					/obj/item/weapon/pen/crayon/rainbow,
 					/obj/item/weapon/bedsheet/clown,
 					/obj/item/weapon/stamp/clown,
